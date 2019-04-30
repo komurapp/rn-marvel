@@ -1,21 +1,23 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, StatusBar } from 'react-native';
+import Home from './src/screens/Home';
+import Description from './src/screens/Description';
+import { StackNavigator } from 'react-navigation';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const App = StackNavigator(
+  {
+    Home: {
+      screen: Home,
+    },
+    Description: {
+      screen: Description,
+    },
   },
-});
+  {
+    cardStyle: {
+      paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight
+    }
+  }
+);
+
+export default App;
