@@ -1,10 +1,14 @@
 import React from 'react';
 import { Platform, StatusBar } from 'react-native';
+import { useScreens } from 'react-native-screens';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
+
 import Home from './src/screens/Home';
 import Description from './src/screens/Description';
-import { StackNavigator } from 'react-navigation';
 
-const App = StackNavigator(
+useScreens();
+
+const App = createStackNavigator(
   {
     Home: {
       screen: Home,
@@ -20,4 +24,4 @@ const App = StackNavigator(
   }
 );
 
-export default App;
+export default createAppContainer(App);

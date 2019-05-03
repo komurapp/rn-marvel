@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import md5 from 'js-md5';
 
-const PUBLIC_kEY = '9ad80cb2cf29a147567ccbb831289fc0';
+const PUBLIC_KEY = '9ad80cb2cf29a147567ccbb831289fc0';
 const PRIVATE_KEY = 'd891c1d5e937a2e12ecab4c517cac43cb344fba3';
 
 class Home extends React.PureComponent {
@@ -19,11 +19,9 @@ class Home extends React.PureComponent {
   async componentDidMount() {
     const timestamp = Number(new Date());
     const hash = md5.create();
-    hash.update(timestamp + PRIVATE_KEY + PUBLIC_kEY);
+    hash.update(timestamp + PRIVATE_KEY + PUBLIC_KEY);
 
-    const response = await fetch(`
-      https://gateway.marvel.com/v1/public/characters?ts=${timestamp}&orderBy=name&limit=10&apikey=${PUBLIC_KEY}&hash=${hash.hex()}
-    `);
+    const response = await fetch(`https://gateway.marvel.com/v1/public/characters?ts=${timestamp}&orderBy=name&limit=10&apikey=${PUBLIC_KEY}&hash=${hash.hex()}`);
     const responseJson = await response.json();
     this.setState({ data: responseJson.data.results });
   }
